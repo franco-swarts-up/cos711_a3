@@ -1,7 +1,10 @@
 import torch
 from PIL import Image, ImageDraw
+from sys import argv
 
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='./yolov5/runs/train/exp/weights/best.pt')
+weight_path = argv[1]
+
+model = torch.hub.load('ultralytics/yolov5', 'custom', path=weight_path)
 
 file = open('./predictions.csv', 'w')
 

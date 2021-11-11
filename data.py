@@ -59,7 +59,6 @@ mkdir('./data/images/val')
 mkdir('./data/labels/train')
 mkdir('./data/labels/val')
 
-
 def rotate(x, y, degrees, ox, oy):
     angle = math.radians(degrees)
 
