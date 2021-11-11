@@ -1,0 +1,8 @@
+backup
+data
+docs
+venv
+yolov5
+.DS_Store
+.idea
+predictions.csv
