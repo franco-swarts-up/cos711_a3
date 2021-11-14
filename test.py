@@ -11,7 +11,7 @@ mkdir('predictions')
 
 file = open('predictions/predictions.csv', 'w')
 
-file.write('Image_ID,class,confidence,xmin,ymin,xmax,ymax\n')
+file.write('Image_ID,class,confidence,ymin,xmin,ymax,xmax\n')
 
 count = 0
 
@@ -34,17 +34,17 @@ for line in open('./data/test/test.csv'):
         height = prediction.iloc[3]
         confidence = prediction.iloc[4]
         label = prediction.iloc[6]
-        minx = (xcenter - width / 2)
-        maxx = (xcenter + width / 2)
-        miny = (ycenter - height / 2)
-        maxy = (ycenter + height / 2)
-        width = width
-        height = height
+        minx = int(xcenter - width / 2)
+        maxx = int(xcenter + width / 2)
+        miny = int(ycenter - height / 2)
+        maxy = int(ycenter + height / 2)
+        width = int(width)
+        height = int(height)
 
         # shape = [(minx, miny), (minx + width, miny + height)]
         # draw_image.rectangle(shape, outline="red")
 
-        file.write('{},{},{},{},{},{},{}\n'.format(id, label, confidence, minx, miny, maxx, maxy))
+        file.write('{},{},{},{},{},{},{}\n'.format(id, label, confidence, miny, minx, maxy, maxx))
         file.flush()
 
     if len(predictions) == 0:
