@@ -218,35 +218,35 @@ for line in open('./data/train/train.csv'):
         label_file.flush()
         label_file.close()
 
-        transpose_image = rotated_image.transpose(Image.FLIP_TOP_BOTTOM)
-        transpose_x_max, transpose_y_min = transpose(rotated_x_max, rotated_y_max,
-                                                     image.width,
-                                                     image.height, 1)
-        transpose_x_min, transpose_y_max = transpose(rotated_x_min, rotated_y_min,
-                                                     image.width,
-                                                     image.height, 1)
-        transpose_width = transpose_x_max - transpose_x_min
-        transpose_height = transpose_y_max - transpose_y_min
-
-        if transpose_x_min < 0 or transpose_y_min < 0 or transpose_width < 0 or transpose_height < 0:
-            print(transpose_x_min)
-            print(transpose_y_min)
-            print(transpose_x_max)
-            print(transpose_y_max)
-            draw = Draw(transpose_image)
-            draw.rectangle([(transpose_x_min, transpose_y_min), (transpose_x_min + transpose_width, transpose_y_min + transpose_height)])
-            transpose_image.show()
-            exit()
-
-        transpose_image.save('./data/images/train/{}_{}_tv.jpg'.format(image_id, i))
-        label_file = open('./data/labels/train/{}_{}_tv.txt'.format(image_id, i), 'a')
-        label_file.write('{} {} {} {} {}\n'.format(label,
-                                                   (transpose_x_min + transpose_width / 2) / image.width,
-                                                   (transpose_y_min + transpose_height / 2) / image.height,
-                                                   transpose_width / image.width,
-                                                   transpose_height / image.height))
-        label_file.flush()
-        label_file.close()
+        # transpose_image = rotated_image.transpose(Image.FLIP_TOP_BOTTOM)
+        # transpose_x_max, transpose_y_min = transpose(rotated_x_max, rotated_y_max,
+        #                                              image.width,
+        #                                              image.height, 1)
+        # transpose_x_min, transpose_y_max = transpose(rotated_x_min, rotated_y_min,
+        #                                              image.width,
+        #                                              image.height, 1)
+        # transpose_width = transpose_x_max - transpose_x_min
+        # transpose_height = transpose_y_max - transpose_y_min
+        #
+        # if transpose_x_min < 0 or transpose_y_min < 0 or transpose_width < 0 or transpose_height < 0:
+        #     print(transpose_x_min)
+        #     print(transpose_y_min)
+        #     print(transpose_x_max)
+        #     print(transpose_y_max)
+        #     draw = Draw(transpose_image)
+        #     draw.rectangle([(transpose_x_min, transpose_y_min), (transpose_x_min + transpose_width, transpose_y_min + transpose_height)])
+        #     transpose_image.show()
+        #     exit()
+        #
+        # transpose_image.save('./data/images/train/{}_{}_tv.jpg'.format(image_id, i))
+        # label_file = open('./data/labels/train/{}_{}_tv.txt'.format(image_id, i), 'a')
+        # label_file.write('{} {} {} {} {}\n'.format(label,
+        #                                            (transpose_x_min + transpose_width / 2) / image.width,
+        #                                            (transpose_y_min + transpose_height / 2) / image.height,
+        #                                            transpose_width / image.width,
+        #                                            transpose_height / image.height))
+        # label_file.flush()
+        # label_file.close()
 
     count += 1
 
