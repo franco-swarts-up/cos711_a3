@@ -126,15 +126,16 @@ for line in open('./data/train/train.csv'):
         rotated_width = rotated_x_max - rotated_x_min
         rotated_height = rotated_y_max - rotated_y_min
 
-        rotated_image.save('./data/images/train/{}_{}.jpg'.format(image_id, i))
-        label_file = open('./data/labels/train/{}_{}.txt'.format(image_id, i), 'a')
-        label_file.write('{} {} {} {} {}\n'.format(label,
-                                                   (rotated_x_min + rotated_width / 2) / image.width,
-                                                   (rotated_y_min + rotated_height / 2) / image.height,
-                                                   rotated_width / image.width,
-                                                   rotated_height / image.height))
-        label_file.flush()
-        label_file.close()
+        if i != 0:
+            rotated_image.save('./data/images/train/{}_{}.jpg'.format(image_id, i))
+            label_file = open('./data/labels/train/{}_{}.txt'.format(image_id, i), 'a')
+            label_file.write('{} {} {} {} {}\n'.format(label,
+                                                       (rotated_x_min + rotated_width / 2) / image.width,
+                                                       (rotated_y_min + rotated_height / 2) / image.height,
+                                                       rotated_width / image.width,
+                                                       rotated_height / image.height))
+            label_file.flush()
+            label_file.close()
 
         transpose_image = rotated_image.transpose(Image.FLIP_LEFT_RIGHT)
         transpose_x_min, transpose_y_max = transpose(rotated_x_max, rotated_y_max,
