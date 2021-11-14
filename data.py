@@ -135,7 +135,6 @@ for id in map:
 
 print(usages)
 print(training_set)
-exit(0)
 
 count = 0
 
