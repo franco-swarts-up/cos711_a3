@@ -31,6 +31,8 @@ usages = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 
 
 training_set = []
 
+
+
 for id in map:
 
     count = sum(map[id])
