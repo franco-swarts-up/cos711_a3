@@ -50,7 +50,7 @@ for line in open('./data/test/test.csv'):
     if len(predictions) == 0:
         file.write('{},{},{},{},{},{},{}\n'.format(id, 'fruit_healthy', 0.0, 0.0, 0.0, 0.0, 0.0))
 
-    result.save('predictions/{}.jpg'.format(id))
+    result.save('predictions/')
 
     count += 1
     print(count)
