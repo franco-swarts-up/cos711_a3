@@ -34,12 +34,12 @@ for line in open('./data/test/test.csv'):
         height = prediction.iloc[3]
         confidence = prediction.iloc[4]
         label = prediction.iloc[6]
-        minx = int(xcenter - width / 2)
-        maxx = int(xcenter + width / 2)
-        miny = int(ycenter - height / 2)
-        maxy = int(ycenter + height / 2)
-        width = int(width)
-        height = int(height)
+        minx = (xcenter - width / 2)
+        maxx = (xcenter + width / 2)
+        miny = (ycenter - height / 2)
+        maxy = (ycenter + height / 2)
+        width = width
+        height = height
 
         # shape = [(minx, miny), (minx + width, miny + height)]
         # draw_image.rectangle(shape, outline="red")
