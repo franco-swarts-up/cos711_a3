@@ -114,17 +114,17 @@ for id in map:
         validation_set.append(id)
         continue
 
-    full = False
-
-    for i in range(len(usages[count])):
-        if map[id][i] + usages[count][i] > min(counts[count]):
-            full = True
-
-    if full:
-        continue
-
-    for i in range(len(map[id])):
-        usages[count][i] += map[id][i]
+    # full = False
+    #
+    # for i in range(len(usages[count])):
+    #     if map[id][i] + usages[count][i] > min(counts[count]):
+    #         full = True
+    #
+    # if full:
+    #     continue
+    #
+    # for i in range(len(map[id])):
+    #     usages[count][i] += map[id][i]
 
     training_set.append(id)
 
@@ -148,22 +148,21 @@ for line in open('./data/train/train.csv'):
 
     image: Image = Image.open('./data/train/{}.jpg'.format(image_id))
 
-    if image_id in validation_set:
-        image.save('./data/images/val/{}.jpg'.format(image_id))
+    image.save('./data/images/val/{}.jpg'.format(image_id))
 
-        label_file = open('./data/labels/val/{}.txt'.format(image_id), 'a')
-        label_file.write('{} {} {} {} {}\n'.format(label,
-                                                 (x_min + width / 2) / 512,
-                                                 (y_min + height / 2) / 512,
-                                                 width / 512,
-                                                 height / 512))
-        label_file.flush()
-        label_file.close()
+    label_file = open('./data/labels/val/{}.txt'.format(image_id), 'a')
+    label_file.write('{} {} {} {} {}\n'.format(label,
+                                               (x_min + width / 2) / 512,
+                                               (y_min + height / 2) / 512,
+                                               width / 512,
+                                               height / 512))
+    label_file.flush()
+    label_file.close()
 
     if image_id not in training_set:
         continue
 
-    for i in [0, 90, 180, 270]:
+    for i in [0, 90, 270]:
         rotated_image = image.rotate(i)
         rotated_x1, rotated_y1 = rotate(x_min,y_min, -i,
                                         image.width / 2,
