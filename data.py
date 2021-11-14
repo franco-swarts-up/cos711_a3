@@ -110,21 +110,21 @@ for id in map:
 
     count = sum(map[id])
 
-    if count != 2:
+    if count != 1 and count != 2:
         validation_set.append(id)
         continue
 
-    # full = False
-    #
-    # for i in range(len(usages[count])):
-    #     if map[id][i] + usages[count][i] > min(counts[count]):
-    #         full = True
-    #
-    # if full:
-    #     continue
-    #
-    # for i in range(len(map[id])):
-    #     usages[count][i] += map[id][i]
+    full = False
+
+    for i in range(len(usages[count])):
+        if map[id][i] + usages[count][i] > min(counts[count]):
+            full = True
+
+    if full:
+        continue
+
+    for i in range(len(map[id])):
+        usages[count][i] += map[id][i]
 
     training_set.append(id)
 
