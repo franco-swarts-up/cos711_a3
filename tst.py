@@ -27,13 +27,6 @@ for i in map:
     for j in range(len(map[i])):
         counts[index][j] += map[i][j]
 
-
-max = 10000
-for i in counts:
-    for j in i:
-        if j != 0 and j < max:
-            max = j
-
 usages = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 training_set = []
@@ -48,7 +41,7 @@ for id in map:
     full = False
 
     for i in range(len(usages[count])):
-        if map[id][i] + usages[count][i] > max:
+        if map[id][i] + usages[count][i] > min(counts[count]):
             full = True
 
     if full:
@@ -59,7 +52,7 @@ for id in map:
 
     training_set.append(id)
 
-print(training_set)
-
+print(counts)
+print(usages)
 
 
