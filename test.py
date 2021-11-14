@@ -26,6 +26,8 @@ for line in open('./data/test/test.csv'):
     image = Image.open(img)
     # draw_image = ImageDraw.Draw(image)
 
+    t = result.pandas().xyxy[0]
+
     for i in range(len(predictions)):
         prediction = predictions.loc[i]
         xcenter = prediction.iloc[0]
