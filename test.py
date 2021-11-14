@@ -1,12 +1,15 @@
 import torch
 from PIL import Image, ImageDraw
 from sys import argv
+from os import mkdir
 
 weight_path = argv[1]
 
 model = torch.hub.load('ultralytics/yolov5', 'custom', path=weight_path)
 
-file = open('./predictions.csv', 'w')
+mkdir('predictions')
+
+file = open('predictions/predictions.csv', 'w')
 
 file.write('Image_ID,class,confidence,xmin,ymin,xmax,ymax\n')
 
@@ -20,7 +23,7 @@ for line in open('./data/test/test.csv'):
     result = model(img)
     predictions = result.pandas().xywh[0]
 
-    # image = Image.open(img)
+    image = Image.open(img)
     # draw_image = ImageDraw.Draw(image)
 
     for i in range(len(predictions)):
@@ -47,9 +50,7 @@ for line in open('./data/test/test.csv'):
     if len(predictions) == 0:
         file.write('{},{},{},{},{},{},{}\n'.format(id, 'fruit_healthy', 0.0, 0.0, 0.0, 0.0, 0.0))
 
-    # image.show()
-    # result.show()
-    # exit(0)
+    image.save('predictions/{}.jpg'.format(id))
 
     count += 1
     print(count)

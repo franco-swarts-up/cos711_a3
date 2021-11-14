@@ -110,7 +110,7 @@ for id in map:
 
     count = sum(map[id])
 
-    if count != 1:
+    if count != 1 and count <= 4:
         validation_set.append(id)
         continue
 
@@ -163,7 +163,7 @@ for line in open('./data/train/train.csv'):
     if image_id not in training_set:
         continue
 
-    for i in [0, 90, 180, 270]:
+    for i in [0, 90, 270]:
         rotated_image = image.rotate(i)
         rotated_x1, rotated_y1 = rotate(x_min,y_min, -i,
                                         image.width / 2,
