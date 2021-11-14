@@ -104,12 +104,14 @@ for i in map:
 usages = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 training_set = []
+validation_set = []
 
 for id in map:
 
     count = sum(map[id])
 
     if count != 1:
+        validation_set.append(id)
         continue
 
     full = False
@@ -145,16 +147,18 @@ for line in open('./data/train/train.csv'):
     y_max = y_min + height
 
     image: Image = Image.open('./data/train/{}.jpg'.format(image_id))
-    # image.save('./data/images/val/{}.jpg'.format(image_id))
-    #
-    # label_file = open('./data/labels/val/{}.txt'.format(image_id), 'a')
-    # label_file.write('{} {} {} {} {}\n'.format(label,
-    #                                          (x_min + width / 2) / 512,
-    #                                          (y_min + height / 2) / 512,
-    #                                          width / 512,
-    #                                          height / 512))
-    # label_file.flush()
-    # label_file.close()
+
+    if image_id in validation_set:
+        image.save('./data/images/val/{}.jpg'.format(image_id))
+
+        label_file = open('./data/labels/val/{}.txt'.format(image_id), 'a')
+        label_file.write('{} {} {} {} {}\n'.format(label,
+                                                 (x_min + width / 2) / 512,
+                                                 (y_min + height / 2) / 512,
+                                                 width / 512,
+                                                 height / 512))
+        label_file.flush()
+        label_file.close()
 
     if image_id not in training_set:
         continue
