@@ -2,6 +2,7 @@ from PIL.ImageDraw import Draw
 from PIL import Image
 from os import mkdir
 import math
+from random import randint
 
 class_map = {
     'fruit_woodiness': 0,
@@ -132,66 +133,54 @@ for line in open('./data/train/train.csv'):
     if image_id not in training_set:
         continue
 
-    padding = 10
-    size_scale = 5
+    # if count in [0, 1]:
+    #     count += 1
+    #     continue
 
     crop_boxes = []
 
-    crop_min_x = x_min - padding
+    size_scale = 5
+
+    crop_min_x = x_min - randint(20, 512)
     if crop_min_x < 0:
         crop_min_x = 0
-    crop_min_y = y_min - padding
+    crop_min_y = y_min - randint(20, 512)
     if crop_min_y < 0:
         crop_min_y = 0
-    crop_max_x = x_min + width * 1 + padding
+    crop_max_x = x_min + width * 1 + randint(20, 512)
     if crop_max_x > image.width:
         crop_max_x = image.width
-    crop_max_y = y_min + height * 1 + padding
+    crop_max_y = y_min + height * 1 + randint(20, 512)
     if crop_max_y > image.height:
         crop_max_y = image.height
 
     crop_boxes.append((crop_min_x, crop_min_y, crop_max_x, crop_max_y))
 
-    crop_min_x = x_min - padding * 20
+    crop_min_x = x_min - randint(20, 512)
     if crop_min_x < 0:
         crop_min_x = 0
-    crop_min_y = y_min - padding * 20
+    crop_min_y = y_min - randint(20, 512)
     if crop_min_y < 0:
         crop_min_y = 0
-    crop_max_x = x_min + width * 1 + padding * 20
+    crop_max_x = x_min + width * size_scale + randint(20, 512)
     if crop_max_x > image.width:
         crop_max_x = image.width
-    crop_max_y = y_min + height * 1 + padding * 20
+    crop_max_y = y_min + height * 1 + randint(20, 512)
     if crop_max_y > image.height:
         crop_max_y = image.height
 
     crop_boxes.append((crop_min_x, crop_min_y, crop_max_x, crop_max_y))
 
-    crop_min_x = x_min - padding
+    crop_min_x = x_min - randint(20, 512)
     if crop_min_x < 0:
         crop_min_x = 0
-    crop_min_y = y_min - padding
+    crop_min_y = y_min - randint(20, 512)
     if crop_min_y < 0:
         crop_min_y = 0
-    crop_max_x = x_min + width * size_scale + padding
+    crop_max_x = x_min + width * 1 + randint(20, 512)
     if crop_max_x > image.width:
         crop_max_x = image.width
-    crop_max_y = y_min + height * 1 + padding
-    if crop_max_y > image.height:
-        crop_max_y = image.height
-
-    crop_boxes.append((crop_min_x, crop_min_y, crop_max_x, crop_max_y))
-
-    crop_min_x = x_min - padding
-    if crop_min_x < 0:
-        crop_min_x = 0
-    crop_min_y = y_min - padding
-    if crop_min_y < 0:
-        crop_min_y = 0
-    crop_max_x = x_min + width * 1 + padding
-    if crop_max_x > image.width:
-        crop_max_x = image.width
-    crop_max_y = y_min + height * size_scale + padding
+    crop_max_y = y_min + height * size_scale + randint(20, 512)
     if crop_max_y > image.height:
         crop_max_y = image.height
 
@@ -218,8 +207,8 @@ for line in open('./data/train/train.csv'):
         crop_width = crop_max_x - crop_min_x
         crop_height = crop_max_y - crop_min_y
 
-        cropped_min_x = (padding if crop_min_x != 0 else x_min)
-        cropped_min_y = (padding if crop_min_y != 0 else y_min)
+        cropped_min_x = (x_min - crop_min_x)
+        cropped_min_y = (y_min - crop_min_y)
         cropped_max_x = (cropped_min_x + width)
         cropped_max_y = (cropped_min_y + height)
 
