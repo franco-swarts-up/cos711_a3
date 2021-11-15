@@ -92,8 +92,8 @@ for image_id in image_labels:
     #
     # for i in range(3):
     #     training_label_counts[count][i] += image_labels[image_id][i]
-
-    training_set.append(image_id)
+    #
+    # training_set.append(image_id)
 
 count = 0
 
@@ -115,19 +115,19 @@ for line in open('./data/train/train.csv'):
 
     image: Image = Image.open('./data/train/{}.jpg'.format(image_id))
 
-    if image_id in validation_set:
-        image.save('./data/images/val/{}.jpg'.format(image_id))
+    # if image_id in validation_set:
+    image.save('./data/images/val/{}.jpg'.format(image_id))
 
-        label_file = open('./data/labels/val/{}.txt'.format(image_id), 'a')
-        label_file.write('{} {} {} {} {}\n'.format(label,
+    label_file = open('./data/labels/val/{}.txt'.format(image_id), 'a')
+    label_file.write('{} {} {} {} {}\n'.format(label,
                                                    (x_min + width / 2.0) / 512.0,
                                                    (y_min + height / 2.0) / 512.0,
                                                    width / 512.0,
                                                    height / 512.0))
-        label_file.flush()
-        label_file.close()
+    label_file.flush()
+    label_file.close()
 
-        continue
+        # continue
 
     if image_id not in training_set:
         continue
