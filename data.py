@@ -93,7 +93,7 @@ for image_id in image_labels:
     # for i in range(3):
     #     training_label_counts[count][i] += image_labels[image_id][i]
     #
-    # training_set.append(image_id)
+    training_set.append(image_id)
 
 count = 0
 
