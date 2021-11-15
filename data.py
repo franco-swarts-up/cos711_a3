@@ -152,6 +152,21 @@ for line in open('./data/train/train.csv'):
 
     crop_boxes.append((crop_min_x, crop_min_y, crop_max_x, crop_max_y))
 
+    crop_min_x = x_min - padding * 20
+    if crop_min_x < 0:
+        crop_min_x = 0
+    crop_min_y = y_min - padding * 20
+    if crop_min_y < 0:
+        crop_min_y = 0
+    crop_max_x = x_min + width * 1 + padding * 20
+    if crop_max_x > image.width:
+        crop_max_x = image.width
+    crop_max_y = y_min + height * 1 + padding * 20
+    if crop_max_y > image.height:
+        crop_max_y = image.height
+
+    crop_boxes.append((crop_min_x, crop_min_y, crop_max_x, crop_max_y))
+
     crop_min_x = x_min - padding
     if crop_min_x < 0:
         crop_min_x = 0
