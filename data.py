@@ -76,22 +76,22 @@ for image_id in image_labels:
         validation_set.append(image_id)
         continue
 
-    full = False
-
-    for i in range(3):
-        if count == 1:
-            if training_label_counts[count][i] + image_labels[image_id][i] > max_count / 6:
-                full = True
-        else:
-            if training_label_counts[count][i] + image_labels[image_id][i] > max_count:
-                full = True
-
-    if full:
-        validation_set.append(image_id)
-        continue
-
-    for i in range(3):
-        training_label_counts[count][i] += image_labels[image_id][i]
+    # full = False
+    #
+    # for i in range(3):
+    #     if count == 1:
+    #         if training_label_counts[count][i] + image_labels[image_id][i] > max_count / 6:
+    #             full = True
+    #     else:
+    #         if training_label_counts[count][i] + image_labels[image_id][i] > max_count:
+    #             full = True
+    #
+    # if full:
+    #     validation_set.append(image_id)
+    #     continue
+    #
+    # for i in range(3):
+    #     training_label_counts[count][i] += image_labels[image_id][i]
 
     training_set.append(image_id)
 
